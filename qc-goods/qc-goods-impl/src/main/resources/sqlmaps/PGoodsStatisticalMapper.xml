@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qcwoshou.goods.dao.PGoodsStatisticalMapper" >
+  <resultMap id="BaseResultMap" type="com.qcwoshou.goods.model.PGoodsStatistical" >
+    <id column="sku_number" property="skuNumber" jdbcType="VARCHAR" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="user_count" property="userCount" jdbcType="INTEGER" />
+    <result column="buy_count" property="buyCount" jdbcType="INTEGER" />
+    <result column="dp_count" property="dpCount" jdbcType="INTEGER" />
+    <result column="dp_count_1" property="dpCount1" jdbcType="INTEGER" />
+    <result column="dp_count_2" property="dpCount2" jdbcType="INTEGER" />
+    <result column="dp_count_3" property="dpCount3" jdbcType="INTEGER" />
+    <result column="dp_count_4" property="dpCount4" jdbcType="INTEGER" />
+    <result column="dp_count_5" property="dpCount5" jdbcType="INTEGER" />
+    <result column="view_count" property="viewCount" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sku_number, goods_id, user_count, buy_count, dp_count, dp_count_1, dp_count_2, dp_count_3, 
+    dp_count_4, dp_count_5, view_count
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qcwoshou.goods.model.PGoodsStatisticalExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from p_goods_statistical
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from p_goods_statistical
+    where sku_number = #{skuNumber,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from p_goods_statistical
+    where sku_number = #{skuNumber,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qcwoshou.goods.model.PGoodsStatisticalExample" >
+    delete from p_goods_statistical
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qcwoshou.goods.model.PGoodsStatistical" >
+    insert into p_goods_statistical (sku_number, goods_id, user_count, 
+      buy_count, dp_count, dp_count_1, 
+      dp_count_2, dp_count_3, dp_count_4, 
+      dp_count_5, view_count)
+    values (#{skuNumber,jdbcType=VARCHAR}, #{goodsId,jdbcType=INTEGER}, #{userCount,jdbcType=INTEGER}, 
+      #{buyCount,jdbcType=INTEGER}, #{dpCount,jdbcType=INTEGER}, #{dpCount1,jdbcType=INTEGER}, 
+      #{dpCount2,jdbcType=INTEGER}, #{dpCount3,jdbcType=INTEGER}, #{dpCount4,jdbcType=INTEGER}, 
+      #{dpCount5,jdbcType=INTEGER}, #{viewCount,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qcwoshou.goods.model.PGoodsStatistical" >
+    insert into p_goods_statistical
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="skuNumber != null" >
+        sku_number,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="userCount != null" >
+        user_count,
+      </if>
+      <if test="buyCount != null" >
+        buy_count,
+      </if>
+      <if test="dpCount != null" >
+        dp_count,
+      </if>
+      <if test="dpCount1 != null" >
+        dp_count_1,
+      </if>
+      <if test="dpCount2 != null" >
+        dp_count_2,
+      </if>
+      <if test="dpCount3 != null" >
+        dp_count_3,
+      </if>
+      <if test="dpCount4 != null" >
+        dp_count_4,
+      </if>
+      <if test="dpCount5 != null" >
+        dp_count_5,
+      </if>
+      <if test="viewCount != null" >
+        view_count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="skuNumber != null" >
+        #{skuNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="userCount != null" >
+        #{userCount,jdbcType=INTEGER},
+      </if>
+      <if test="buyCount != null" >
+        #{buyCount,jdbcType=INTEGER},
+      </if>
+      <if test="dpCount != null" >
+        #{dpCount,jdbcType=INTEGER},
+      </if>
+      <if test="dpCount1 != null" >
+        #{dpCount1,jdbcType=INTEGER},
+      </if>
+      <if test="dpCount2 != null" >
+        #{dpCount2,jdbcType=INTEGER},
+      </if>
+      <if test="dpCount3 != null" >
+        #{dpCount3,jdbcType=INTEGER},
+      </if>
+      <if test="dpCount4 != null" >
+        #{dpCount4,jdbcType=INTEGER},
+      </if>
+      <if test="dpCount5 != null" >
+        #{dpCount5,jdbcType=INTEGER},
+      </if>
+      <if test="viewCount != null" >
+        #{viewCount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qcwoshou.goods.model.PGoodsStatisticalExample" resultType="java.lang.Integer" >
+    select count(*) from p_goods_statistical
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update p_goods_statistical
+    <set >
+      <if test="record.skuNumber != null" >
+        sku_number = #{record.skuNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsId != null" >
+        goods_id = #{record.goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userCount != null" >
+        user_count = #{record.userCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.buyCount != null" >
+        buy_count = #{record.buyCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.dpCount != null" >
+        dp_count = #{record.dpCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.dpCount1 != null" >
+        dp_count_1 = #{record.dpCount1,jdbcType=INTEGER},
+      </if>
+      <if test="record.dpCount2 != null" >
+        dp_count_2 = #{record.dpCount2,jdbcType=INTEGER},
+      </if>
+      <if test="record.dpCount3 != null" >
+        dp_count_3 = #{record.dpCount3,jdbcType=INTEGER},
+      </if>
+      <if test="record.dpCount4 != null" >
+        dp_count_4 = #{record.dpCount4,jdbcType=INTEGER},
+      </if>
+      <if test="record.dpCount5 != null" >
+        dp_count_5 = #{record.dpCount5,jdbcType=INTEGER},
+      </if>
+      <if test="record.viewCount != null" >
+        view_count = #{record.viewCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update p_goods_statistical
+    set sku_number = #{record.skuNumber,jdbcType=VARCHAR},
+      goods_id = #{record.goodsId,jdbcType=INTEGER},
+      user_count = #{record.userCount,jdbcType=INTEGER},
+      buy_count = #{record.buyCount,jdbcType=INTEGER},
+      dp_count = #{record.dpCount,jdbcType=INTEGER},
+      dp_count_1 = #{record.dpCount1,jdbcType=INTEGER},
+      dp_count_2 = #{record.dpCount2,jdbcType=INTEGER},
+      dp_count_3 = #{record.dpCount3,jdbcType=INTEGER},
+      dp_count_4 = #{record.dpCount4,jdbcType=INTEGER},
+      dp_count_5 = #{record.dpCount5,jdbcType=INTEGER},
+      view_count = #{record.viewCount,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qcwoshou.goods.model.PGoodsStatistical" >
+    update p_goods_statistical
+    <set >
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="userCount != null" >
+        user_count = #{userCount,jdbcType=INTEGER},
+      </if>
+      <if test="buyCount != null" >
+        buy_count = #{buyCount,jdbcType=INTEGER},
+      </if>
+      <if test="dpCount != null" >
+        dp_count = #{dpCount,jdbcType=INTEGER},
+      </if>
+      <if test="dpCount1 != null" >
+        dp_count_1 = #{dpCount1,jdbcType=INTEGER},
+      </if>
+      <if test="dpCount2 != null" >
+        dp_count_2 = #{dpCount2,jdbcType=INTEGER},
+      </if>
+      <if test="dpCount3 != null" >
+        dp_count_3 = #{dpCount3,jdbcType=INTEGER},
+      </if>
+      <if test="dpCount4 != null" >
+        dp_count_4 = #{dpCount4,jdbcType=INTEGER},
+      </if>
+      <if test="dpCount5 != null" >
+        dp_count_5 = #{dpCount5,jdbcType=INTEGER},
+      </if>
+      <if test="viewCount != null" >
+        view_count = #{viewCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where sku_number = #{skuNumber,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qcwoshou.goods.model.PGoodsStatistical" >
+    update p_goods_statistical
+    set goods_id = #{goodsId,jdbcType=INTEGER},
+      user_count = #{userCount,jdbcType=INTEGER},
+      buy_count = #{buyCount,jdbcType=INTEGER},
+      dp_count = #{dpCount,jdbcType=INTEGER},
+      dp_count_1 = #{dpCount1,jdbcType=INTEGER},
+      dp_count_2 = #{dpCount2,jdbcType=INTEGER},
+      dp_count_3 = #{dpCount3,jdbcType=INTEGER},
+      dp_count_4 = #{dpCount4,jdbcType=INTEGER},
+      dp_count_5 = #{dpCount5,jdbcType=INTEGER},
+      view_count = #{viewCount,jdbcType=INTEGER}
+    where sku_number = #{skuNumber,jdbcType=VARCHAR}
+  </update>
+</mapper>

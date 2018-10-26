@@ -1,0 +1,11 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.qcwoshou.config.redis.RedisConfig",
+      "name": "config",
+      "type": "com.qcwoshou.config.redis.RedisConfig"
+    }
+  ],
+  "properties": []
+}

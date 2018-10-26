@@ -1,0 +1,6 @@
+server:
+  port: ${PORT:10500}
+spring:
+  profiles:
+    active: dev
+

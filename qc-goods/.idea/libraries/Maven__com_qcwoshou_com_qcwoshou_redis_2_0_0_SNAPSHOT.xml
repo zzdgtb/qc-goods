@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.qcwoshou:com.qcwoshou.redis:2.0.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://D:/MyRepository/com/qcwoshou/com.qcwoshou.redis/2.0.0-SNAPSHOT/com.qcwoshou.redis-2.0.0-20181023.020427-3.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://D:/MyRepository/com/qcwoshou/com.qcwoshou.redis/2.0.0-SNAPSHOT/com.qcwoshou.redis-2.0.0-20181023.020427-3-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://D:/MyRepository/com/qcwoshou/com.qcwoshou.redis/2.0.0-SNAPSHOT/com.qcwoshou.redis-2.0.0-20181023.020427-3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

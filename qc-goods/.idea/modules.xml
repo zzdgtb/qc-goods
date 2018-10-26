@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/qc-goods.iml" filepath="$PROJECT_DIR$/qc-goods.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qc-goods-api/qc-goods-api.iml" filepath="$PROJECT_DIR$/qc-goods-api/qc-goods-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qc-goods-impl/qc-goods-impl.iml" filepath="$PROJECT_DIR$/qc-goods-impl/qc-goods-impl.iml" />
+    </modules>
+  </component>
+</project>

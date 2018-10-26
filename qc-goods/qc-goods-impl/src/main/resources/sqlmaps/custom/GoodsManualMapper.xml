@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qcwoshou.goods.dao.GoodsManualMapper" >
+    <resultMap id="BaseResultMap" type="com.qcwoshou.goods.model.GoodsSku" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+        <result column="sku_number" property="skuNumber" jdbcType="VARCHAR" />
+        <result column="model_number" property="modelNumber" jdbcType="VARCHAR" />
+        <result column="sku_title" property="skuTitle" jdbcType="VARCHAR" />
+        <result column="max_bought" property="maxBought" jdbcType="INTEGER" />
+        <result column="bought" property="bought" jdbcType="INTEGER" />
+        <result column="sort" property="sort" jdbcType="TINYINT" />
+        <result column="current_price" property="currentPrice" jdbcType="DECIMAL" />
+        <result column="balance_price" property="balancePrice" jdbcType="DECIMAL" />
+        <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
+        <result column="min_buy_count" property="minBuyCount" jdbcType="INTEGER" />
+        <result column="use_score" property="useScore" jdbcType="TINYINT" />
+        <result column="integral_use_ratio" property="integralUseRatio" jdbcType="INTEGER" />
+    </resultMap>
+    <resultMap id="SelectListByConditionResultMap" type="com.qcwoshou.goods.dto.response.GoodsResponse" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
+        <result column="goods_type_name" property="goodsTypeName" jdbcType="VARCHAR" />
+        <result column="is_onlive" property="isOnlive" jdbcType="TINYINT" />
+        <result column="origin_price" property="originPrice" jdbcType="DECIMAL" />
+        <result column="current_price" property="currentPrice" jdbcType="DECIMAL" />
+        <result column="is_delivery" property="isDelivery" jdbcType="BIT" />
+        <result column="is_delete" property="isDelete" jdbcType="BIT" />
+        <result column="is_new" property="isNew" jdbcType="BIT" />
+        <result column="publish_wait" property="publishWait" jdbcType="BIT" />
+        <result column="img" property="img" jdbcType="VARCHAR" />
+    </resultMap>
+    <resultMap id="SelectExportListResultMap" type="com.qcwoshou.goods.dto.response.GoodsExportQueryResponse" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="sku_title" property="skuTitle" jdbcType="VARCHAR" />
+        <result column="pid" property="pid" jdbcType="INTEGER" />
+        <result column="goods_type_name" property="goodsTypeName" jdbcType="VARCHAR" />
+        <result column="publish_wait" property="publishWait" jdbcType="TINYINT" />        
+        <result column="sku_number" property="skuNumber" jdbcType="VARCHAR" />
+        <result column="origin_price" property="originPrice" jdbcType="DECIMAL" />
+        <result column="current_price" property="currentPrice" jdbcType="DECIMAL" />
+        <result column="balance_price" property="balancePrice" jdbcType="DECIMAL" />
+        <result column="bought" property="bought" jdbcType="INTEGER" />
+        <result column="integral_use_ratio" property="integralUseRatio" jdbcType="INTEGER" />
+        <result column="min_buy_count" property="minBuyCount" jdbcType="INTEGER" />
+        <result column="shelves_date" property="shelvesDate" jdbcType="TIMESTAMP" />
+        <result column="last_update_date" property="lastUpdateDate" jdbcType="TIMESTAMP" />
+        <result column="use_score" property="useScore" jdbcType="TINYINT" />
+        <result column="is_delivery" property="isDelivery" jdbcType="TINYINT" />
+        <result column="is_own" property="isOwn" jdbcType="TINYINT" />
+        <result column="is_real_name" property="isRealName" jdbcType="TINYINT" />
+        <result column="buy_count" property="buyCount" jdbcType="INTEGER" />
+    </resultMap>
+  <resultMap id="SelectAppListByConditionResultMap" type="com.qcwoshou.goods.dto.response.AppGoodsListResponse" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />    
+    <result column="goods_type_id" property="goodsTypeId" jdbcType="INTEGER" />
+    <result column="is_onlive" property="isOnlive" jdbcType="TINYINT" />
+    <result column="current_price" property="currentPrice" jdbcType="DECIMAL" />
+    <result column="is_own" property="isOwn" jdbcType="BIT" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="selectGoodsTagByGoodsIdResultMap" type="com.qcwoshou.goods.model.PGoodsTag" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="tag_name" property="tagName" jdbcType="VARCHAR" />
+    <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
+    <result column="add_time" property="addTime" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <resultMap id="selectGoodsTypeResultMap" type="com.qcwoshou.goods.facade.dto.response.GoodsTypeSelectResponse" >
+  	<result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+  	<result column="id" property="id" jdbcType="INTEGER" />
+  	<result column="pid" property="pid" jdbcType="INTEGER" />
+  	<result column="name" property="name" jdbcType="VARCHAR" />
+  	<result column="level" property="level" jdbcType="TINYINT" />
+  </resultMap>
+  
+  <resultMap id="selectGoodsTagRelationResultMap" type="com.qcwoshou.goods.dto.response.GoodsTagRelationResponse" >
+  	<result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+  	<result column="tag_id" property="tagId" jdbcType="INTEGER" />
+  	<result column="tag_name" property="tagName" jdbcType="INTEGER" />
+  	<result column="is_checked" property="isChecked" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <resultMap id="selectGoodsAttrValueRelationResultMap" type="com.qcwoshou.goods.dto.response.TypeAttrValueResponse" >
+  	<result column="id" property="id" jdbcType="INTEGER" />
+  	<result column="attribute_id" property="attributeId" jdbcType="INTEGER" />
+  	<result column="attribute_value" property="attributeValue" jdbcType="INTEGER" />
+  	<result column="is_checked" property="isChecked" jdbcType="INTEGER" />
+  </resultMap>
+	
+    <resultMap id="supplierInfoMap" type="com.qcwoshou.goods.model.custom.GoodsWithSupplierInfoVo" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="supplier_id" property="supplierId" jdbcType="INTEGER" />
+        <result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
+        <result column="img" property="img" jdbcType="VARCHAR" />
+        <result column="goods_type_id" property="goodsTypeId" jdbcType="INTEGER" />
+        <result column="is_onlive" property="isOnlive" jdbcType="TINYINT" />
+        <result column="is_delivery" property="isDelivery" jdbcType="TINYINT" />
+        <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
+        <result column="is_new" property="isNew" jdbcType="TINYINT" />
+        <result column="brand_id" property="brandId" jdbcType="INTEGER" />
+        <result column="publish_wait" property="publishWait" jdbcType="TINYINT" />
+        <result column="is_real_name" property="isRealName" jdbcType="TINYINT" />
+    </resultMap>
+
+  
+  <select id="selectListByCondition" resultMap="SelectListByConditionResultMap" parameterType="com.qcwoshou.goods.dto.request.GoodsListRequest" >
+    select a.id,a.name,a.publish_wait,a.is_delivery,img,current_price,
+	a.is_new,a.is_onlive,b.supplier_name,c.name as goods_type_name from p_goods a
+	left join u_supplier_user b
+	on a.supplier_id = b.supplier_id
+	left join p_goods_type c
+	on a.goods_type_id = c.id
+	where 1=1
+	and a.is_delete = 0
+	and b.auditor_status = 1
+	<if test="publishWait != null" >
+        and a.publish_wait = #{publishWait,jdbcType=TINYINT}
+    </if>
+	<if test="isOnlive != null" >
+        and a.is_onlive = #{isOnlive,jdbcType=TINYINT}
+    </if>
+    <if test="goodsTypeId != null" >
+        and a.goods_type_id = #{goodsTypeId,jdbcType=INTEGER}
+    </if>
+    <if test="supplierId != null" >
+        and a.supplier_id = #{supplierId,jdbcType=INTEGER}
+    </if>
+    <if test="id != null" >
+        and a.id = #{id,jdbcType=TINYINT}
+    </if>
+    <if test="name != null" >
+        and a.name like concat(concat('%',#{name,jdbcType=VARCHAR}),'%')
+    </if>
+    <if test="isNew != null" >
+        and a.is_new = #{isNew,jdbcType=TINYINT}
+    </if>
+    <if test="isDelivery != null" >
+        and a.is_delivery = #{isDelivery,jdbcType=TINYINT}
+    </if>
+    order by a.id desc
+  </select>
+  
+  <select id="selectExportList" resultMap="SelectExportListResultMap" parameterType="com.qcwoshou.goods.dto.request.GoodsExportQueryRequest" >
+    select a.id,a.name,d.sku_title,c.pid,c.name as goods_type_name,a.publish_wait,
+		d.sku_number,d.current_price,d.origin_price,d.balance_price,d.bought,d.integral_use_ratio,d.min_buy_count,
+	  	a.shelves_date,a.last_update_date,d.use_score,a.is_delivery,
+		a.is_own,a.is_real_name,e.buy_count 
+	from p_goods a
+	left join u_supplier_user b
+	on a.supplier_id = b.supplier_id
+	left join p_goods_type c
+	on a.goods_type_id = c.id
+    left join p_goods_sku d
+    on a.id = d.goods_id
+    left join p_goods_statistical e
+    on e.sku_number = d.sku_number
+	where 1=1
+	and a.is_delete = 0
+	and b.auditor_status = 1
+	and c.is_delete = 0
+  	and d.is_delete = 0
+	<if test="publishWait != null" >
+        and a.publish_wait = #{publishWait,jdbcType=TINYINT}
+    </if>
+	<if test="isOnlive != null" >
+        and a.is_onlive = #{isOnlive,jdbcType=TINYINT}
+    </if>
+    <if test="goodsTypeId != null" >
+        and a.goods_type_id = #{goodsTypeId,jdbcType=INTEGER}
+    </if>
+    <if test="supplierId != null" >
+        and a.supplier_id = #{supplierId,jdbcType=INTEGER}
+    </if>
+    <if test="id != null" >
+        and a.id = #{id,jdbcType=TINYINT}
+    </if>
+    <if test="name != null" >
+        and a.name like concat(concat('%',#{name,jdbcType=VARCHAR}),'%')
+    </if>
+    <if test="isNew != null" >
+        and a.is_new = #{isNew,jdbcType=TINYINT}
+    </if>
+    <if test="isDelivery != null" >
+        and a.is_delivery = #{isDelivery,jdbcType=TINYINT}
+    </if>
+    order by a.id desc
+  </select>
+  
+  <select id="selectAppListByCondition" resultMap="SelectAppListByConditionResultMap" parameterType="com.qcwoshou.goods.dto.request.AppGoodsListRequest" >
+    select distinct a.id,a.name,a.deal_num,a.goods_type_id,a.img,a.is_own,
+    (case when (select current_price from p_goods_sku s where s.goods_id = a.id and s.bought > 0 limit 1) is null 
+          then (select current_price from p_goods_sku s where s.goods_id = a.id limit 1) 
+          else (select current_price from p_goods_sku s where s.goods_id = a.id and s.bought > 0 limit 1) end) AS current_price 
+	from p_goods a
+	left join brand_goods_type b
+	on a.goods_type_id = b.goods_type_id
+	LEFT JOIN p_attr_type_relation c
+	on a.goods_type_id = c.goods_type_id
+	left join p_type_arrt_value d
+	on c.attr_id = d.attribute_id
+	left join u_supplier_user e
+	on a.supplier_id = e.supplier_id
+	where 1=1
+	and a.is_delete = 0
+	and a.is_onlive = 1
+	and a.publish_wait = 1
+	and e.auditor_status = 1
+    <if test="goodsTypeId != null" >
+        and a.goods_type_id = #{goodsTypeId,jdbcType=INTEGER}
+    </if>
+    
+    <if test="brandIdArray != null" >
+    	and b.brand_id in
+    	<foreach item="item" index="index" collection="brandIdArray" open="(" separator="," close=")">  
+ 			 #{item}
+		</foreach> 
+    </if>
+    <if test="attributeValueIdArray != null" >
+        and d.id in
+    	<foreach item="item" index="index" collection="attributeValueIdArray" open="(" separator="," close=")">  
+ 			 #{item}
+		</foreach> 
+    </if>
+    order by 1=1
+    <choose>
+    	<when test="priceOrder == 1">
+             ,(case when (select current_price from p_goods_sku s where s.goods_id = a.id and s.bought > 0 limit 1) is null 
+          then (select current_price from p_goods_sku s where s.goods_id = a.id limit 1) 
+          else (select current_price from p_goods_sku s where s.goods_id = a.id and s.bought > 0 limit 1) end) 
+        </when>
+        <when test="priceOrder == 2">
+            ,(case when (select current_price from p_goods_sku s where s.goods_id = a.id and s.bought > 0 limit 1) is null 
+          then (select current_price from p_goods_sku s where s.goods_id = a.id limit 1) 
+          else (select current_price from p_goods_sku s where s.goods_id = a.id and s.bought > 0 limit 1) end) desc
+        </when>
+    </choose>
+    <choose>
+        <when test="isOwn == 1">
+            ,a.is_own desc
+        </when>
+    </choose>
+    
+  </select>
+  
+  <select id="selectAppSearchListByCondition" resultMap="SelectAppListByConditionResultMap" parameterType="com.qcwoshou.goods.dto.request.AppGoodsSearchListRequest" >
+    select a.id,a.name,a.deal_num,a.goods_type_id,a.img,a.is_own,
+    (case when (select current_price from p_goods_sku s where s.goods_id = a.id and s.bought > 0 limit 1) is null 
+          then (select current_price from p_goods_sku s where s.goods_id = a.id limit 1) 
+          else (select current_price from p_goods_sku s where s.goods_id = a.id and s.bought > 0 limit 1) end) AS current_price 
+	from p_goods a
+	left join u_supplier_user b
+	on a.supplier_id = b.supplier_id
+	where 1=1
+	and b.auditor_status = 1
+	and a.is_delete = 0
+	and a.is_onlive = 1
+	and a.publish_wait = 1
+   <if test="keyword != null" >
+        and (a.seo_keywords like concat(concat('%',#{keyword,jdbcType=VARCHAR}),'%')
+        	or a.name like concat(concat('%',#{keyword,jdbcType=VARCHAR}),'%')
+        )
+    </if>
+    order by 1=1
+    <choose>
+    	<when test="priceOrder == 1">
+            ,(case when (select current_price from p_goods_sku s where s.goods_id = a.id and s.bought > 0 limit 1) is null 
+          then (select current_price from p_goods_sku s where s.goods_id = a.id limit 1) 
+          else (select current_price from p_goods_sku s where s.goods_id = a.id and s.bought > 0 limit 1) end)
+        </when>
+        <when test="priceOrder == 2">
+            ,(case when (select current_price from p_goods_sku s where s.goods_id = a.id and s.bought > 0 limit 1) is null 
+          then (select current_price from p_goods_sku s where s.goods_id = a.id limit 1) 
+          else (select current_price from p_goods_sku s where s.goods_id = a.id and s.bought > 0 limit 1) end) desc
+        </when>
+    </choose>
+    <choose>
+        <when test="isOwn == 1">
+            ,a.is_own desc
+        </when>
+    </choose>
+  </select>
+  
+  <select id="selectAppHomeNewListByCondition" resultMap="SelectAppListByConditionResultMap" parameterType="com.qcwoshou.goods.dto.request.AppGoodsHomeNewListRequest" >
+    select a.id,a.name,a.deal_num,a.goods_type_id,a.img,a.is_own,a.current_price
+	from p_goods a
+	left join u_supplier_user b
+	on a.supplier_id = b.supplier_id
+	where 1=1
+	and b.auditor_status = 1
+	and a.is_delete = 0
+	and a.is_onlive = 1
+	and a.publish_wait = 1
+    and a.is_new = 1
+  </select>
+  
+  <select id="selectGoodsTagByGoodsId" resultMap="selectGoodsTagByGoodsIdResultMap" parameterType="java.lang.Integer" >
+  	select a.* from p_goods_tag a
+	inner join p_goods_tag_relation b
+	on a.id = b.tag_id
+	where b.goods_id = #{goodsTypeId,jdbcType=INTEGER}
+	and a.is_delete = 0
+  </select>
+  
+  <select id="selectGoodsType" resultMap="selectGoodsTypeResultMap" parameterType="java.util.List">
+  	select a.id as goods_id,b.id,b.pid,b.name,b.`level` from p_goods a
+	left join p_goods_type b
+	on a.goods_type_id = b.id
+	where 1=1
+	and a.id in 
+	<foreach collection="goodsIds" index="index" item="item" open="(" separator="," close=")">
+		#{item}
+	</foreach>
+	and b.is_delete = 0
+  </select>
+  
+  <select id="selectGoodsTagRelation" resultMap="selectGoodsTagRelationResultMap" parameterType="java.lang.Integer">
+	select a.id as tag_id,a.tag_name,b.goods_id,(case when goods_id is null then 0 else 1 end) is_checked 
+	from p_goods_tag a 
+	left join (select * from p_goods_tag_relation where goods_id = #{goodsId,jdbcType=INTEGER}) b
+	on a.id = b.tag_id
+	where 1=1
+	and a.is_delete = 0
+  </select>
+  
+  <select id="selectGoodsAttrValueRelation" resultMap="selectGoodsAttrValueRelationResultMap" >
+	select v.attribute_id,v.id,v.attribute_value,(case when t.attribute_id is null then 0 else 1 end) is_checked 
+	from p_type_arrt_value v
+	LEFT JOIN 
+	(select a.attribute_id,a.attribute_value_id,b.attribute_value from p_goods_attr a
+	left join p_type_arrt_value b
+	on a.attribute_id = b.attribute_id
+	and a.attribute_value_id = b.id
+	where a.goods_id = #{goodsId,jdbcType=INTEGER}
+	) t
+	on v.id = t.attribute_value_id
+	and v.attribute_id = t.attribute_id
+	where 1=1
+	and v.is_delete = 0
+	and v.attribute_id = #{attributeId,jdbcType=INTEGER}
+	order by v.sort desc
+  </select>
+
+    <!--获取商品附带商家信息-->
+    <select id="selectSupplierAndGoodsInfo" resultMap="supplierInfoMap">
+      select g.*,s.supplier_name from p_goods g inner join u_supplier_user s
+      where g.id = #{goodsId,jdbcType=INTEGER}
+      and g.supplier_id = s.supplier_id
+      and g.is_delete = 0
+    </select>
+
+    <select id="selectGoodsStockByGoodsIdAndSkuNumber" resultMap="BaseResultMap">
+      select s.* from p_goods g inner join p_goods_sku s
+      where g.id = #{goodsId,jdbcType=INTEGER}
+      and g.id = s.goods_id
+      and g.is_delete = 0
+      and g.is_onlive = 1
+	  and s.sku_number = #{skuNumber,jdbcType=VARCHAR}
+    </select>
+    
+	<update id="deleteGoodsById" parameterType="map" >
+	    update p_goods 
+	    set is_delete = 1 
+	    where id = #{id,jdbcType=INTEGER}
+	  </update>
+
+	<update id="updateGoodsShelvesed" parameterType="map" >
+	    update p_goods 
+	    set is_onlive = 1 
+	    where  is_delete = 0
+      	   and is_onlive = 2
+      	   and publish_wait = 1
+      	   and shelves_type = 2
+      	   and shelves_date &lt; NOW()
+	  </update>
+	  
+</mapper>

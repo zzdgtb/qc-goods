@@ -1,0 +1,734 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qcwoshou.goods.dao.GoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.qcwoshou.goods.model.Goods" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="deal_num" property="dealNum" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="supplier_id" property="supplierId" jdbcType="INTEGER" />
+    <result column="agent_id" property="agentId" jdbcType="INTEGER" />
+    <result column="goods_type_id" property="goodsTypeId" jdbcType="INTEGER" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
+    <result column="is_onlive" property="isOnlive" jdbcType="TINYINT" />
+    <result column="begin_time" property="beginTime" jdbcType="INTEGER" />
+    <result column="current_price" property="currentPrice" jdbcType="DECIMAL" />
+    <result column="is_delivery" property="isDelivery" jdbcType="TINYINT" />
+    <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
+    <result column="is_new" property="isNew" jdbcType="TINYINT" />
+    <result column="is_own" property="isOwn" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="INTEGER" />
+    <result column="brand_id" property="brandId" jdbcType="INTEGER" />
+    <result column="publish_wait" property="publishWait" jdbcType="TINYINT" />
+    <result column="submit_from" property="submitFrom" jdbcType="TINYINT" />
+    <result column="is_real_name" property="isRealName" jdbcType="TINYINT" />
+    <result column="reviewer_id" property="reviewerId" jdbcType="INTEGER" />
+    <result column="last_reviewer_time" property="lastReviewerTime" jdbcType="INTEGER" />
+    <result column="create_user_id" property="createUserId" jdbcType="INTEGER" />
+    <result column="shelves_type" property="shelvesType" jdbcType="TINYINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="last_update_date" property="lastUpdateDate" jdbcType="TIMESTAMP" />
+    <result column="audit_time" property="auditTime" jdbcType="TIMESTAMP" />
+    <result column="ads_message" property="adsMessage" jdbcType="VARCHAR" />
+    <result column="seo_keywords" property="seoKeywords" jdbcType="VARCHAR" />
+    <result column="bought_warning" property="boughtWarning" jdbcType="TINYINT" />
+    <result column="shelves_date" property="shelvesDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.qcwoshou.goods.model.Goods" extends="BaseResultMap" >
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, deal_num, name, supplier_id, agent_id, goods_type_id, img, is_onlive, begin_time, 
+    current_price, is_delivery, is_delete, is_new, is_own, create_time, update_time, 
+    brand_id, publish_wait, submit_from, is_real_name, reviewer_id, last_reviewer_time, 
+    create_user_id, shelves_type, create_date, last_update_date, audit_time, ads_message, 
+    seo_keywords, bought_warning, shelves_date
+  </sql>
+  <sql id="Blob_Column_List" >
+    description
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.qcwoshou.goods.model.GoodsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from p_goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qcwoshou.goods.model.GoodsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from p_goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from p_goods
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from p_goods
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qcwoshou.goods.model.GoodsExample" >
+    delete from p_goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qcwoshou.goods.model.Goods" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into p_goods (deal_num, name, supplier_id, 
+      agent_id, goods_type_id, img, 
+      is_onlive, begin_time, current_price, 
+      is_delivery, is_delete, is_new, 
+      is_own, create_time, update_time, 
+      brand_id, publish_wait, submit_from, 
+      is_real_name, reviewer_id, last_reviewer_time, 
+      create_user_id, shelves_type, create_date, 
+      last_update_date, audit_time, ads_message, 
+      seo_keywords, bought_warning, shelves_date, 
+      description)
+    values (#{dealNum,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{supplierId,jdbcType=INTEGER}, 
+      #{agentId,jdbcType=INTEGER}, #{goodsTypeId,jdbcType=INTEGER}, #{img,jdbcType=VARCHAR}, 
+      #{isOnlive,jdbcType=TINYINT}, #{beginTime,jdbcType=INTEGER}, #{currentPrice,jdbcType=DECIMAL}, 
+      #{isDelivery,jdbcType=TINYINT}, #{isDelete,jdbcType=TINYINT}, #{isNew,jdbcType=TINYINT}, 
+      #{isOwn,jdbcType=TINYINT}, #{createTime,jdbcType=INTEGER}, #{updateTime,jdbcType=INTEGER}, 
+      #{brandId,jdbcType=INTEGER}, #{publishWait,jdbcType=TINYINT}, #{submitFrom,jdbcType=TINYINT}, 
+      #{isRealName,jdbcType=TINYINT}, #{reviewerId,jdbcType=INTEGER}, #{lastReviewerTime,jdbcType=INTEGER}, 
+      #{createUserId,jdbcType=INTEGER}, #{shelvesType,jdbcType=TINYINT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastUpdateDate,jdbcType=TIMESTAMP}, #{auditTime,jdbcType=TIMESTAMP}, #{adsMessage,jdbcType=VARCHAR}, 
+      #{seoKeywords,jdbcType=VARCHAR}, #{boughtWarning,jdbcType=TINYINT}, #{shelvesDate,jdbcType=TIMESTAMP}, 
+      #{description,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qcwoshou.goods.model.Goods" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into p_goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dealNum != null" >
+        deal_num,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="supplierId != null" >
+        supplier_id,
+      </if>
+      <if test="agentId != null" >
+        agent_id,
+      </if>
+      <if test="goodsTypeId != null" >
+        goods_type_id,
+      </if>
+      <if test="img != null" >
+        img,
+      </if>
+      <if test="isOnlive != null" >
+        is_onlive,
+      </if>
+      <if test="beginTime != null" >
+        begin_time,
+      </if>
+      <if test="currentPrice != null" >
+        current_price,
+      </if>
+      <if test="isDelivery != null" >
+        is_delivery,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+      <if test="isNew != null" >
+        is_new,
+      </if>
+      <if test="isOwn != null" >
+        is_own,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="brandId != null" >
+        brand_id,
+      </if>
+      <if test="publishWait != null" >
+        publish_wait,
+      </if>
+      <if test="submitFrom != null" >
+        submit_from,
+      </if>
+      <if test="isRealName != null" >
+        is_real_name,
+      </if>
+      <if test="reviewerId != null" >
+        reviewer_id,
+      </if>
+      <if test="lastReviewerTime != null" >
+        last_reviewer_time,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="shelvesType != null" >
+        shelves_type,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="lastUpdateDate != null" >
+        last_update_date,
+      </if>
+      <if test="auditTime != null" >
+        audit_time,
+      </if>
+      <if test="adsMessage != null" >
+        ads_message,
+      </if>
+      <if test="seoKeywords != null" >
+        seo_keywords,
+      </if>
+      <if test="boughtWarning != null" >
+        bought_warning,
+      </if>
+      <if test="shelvesDate != null" >
+        shelves_date,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dealNum != null" >
+        #{dealNum,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null" >
+        #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="agentId != null" >
+        #{agentId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsTypeId != null" >
+        #{goodsTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="isOnlive != null" >
+        #{isOnlive,jdbcType=TINYINT},
+      </if>
+      <if test="beginTime != null" >
+        #{beginTime,jdbcType=INTEGER},
+      </if>
+      <if test="currentPrice != null" >
+        #{currentPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="isDelivery != null" >
+        #{isDelivery,jdbcType=TINYINT},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=TINYINT},
+      </if>
+      <if test="isNew != null" >
+        #{isNew,jdbcType=TINYINT},
+      </if>
+      <if test="isOwn != null" >
+        #{isOwn,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=INTEGER},
+      </if>
+      <if test="brandId != null" >
+        #{brandId,jdbcType=INTEGER},
+      </if>
+      <if test="publishWait != null" >
+        #{publishWait,jdbcType=TINYINT},
+      </if>
+      <if test="submitFrom != null" >
+        #{submitFrom,jdbcType=TINYINT},
+      </if>
+      <if test="isRealName != null" >
+        #{isRealName,jdbcType=TINYINT},
+      </if>
+      <if test="reviewerId != null" >
+        #{reviewerId,jdbcType=INTEGER},
+      </if>
+      <if test="lastReviewerTime != null" >
+        #{lastReviewerTime,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="shelvesType != null" >
+        #{shelvesType,jdbcType=TINYINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateDate != null" >
+        #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditTime != null" >
+        #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adsMessage != null" >
+        #{adsMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="seoKeywords != null" >
+        #{seoKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="boughtWarning != null" >
+        #{boughtWarning,jdbcType=TINYINT},
+      </if>
+      <if test="shelvesDate != null" >
+        #{shelvesDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qcwoshou.goods.model.GoodsExample" resultType="java.lang.Integer" >
+    select count(*) from p_goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update p_goods
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.dealNum != null" >
+        deal_num = #{record.dealNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierId != null" >
+        supplier_id = #{record.supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="record.agentId != null" >
+        agent_id = #{record.agentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsTypeId != null" >
+        goods_type_id = #{record.goodsTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.img != null" >
+        img = #{record.img,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isOnlive != null" >
+        is_onlive = #{record.isOnlive,jdbcType=TINYINT},
+      </if>
+      <if test="record.beginTime != null" >
+        begin_time = #{record.beginTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.currentPrice != null" >
+        current_price = #{record.currentPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isDelivery != null" >
+        is_delivery = #{record.isDelivery,jdbcType=TINYINT},
+      </if>
+      <if test="record.isDelete != null" >
+        is_delete = #{record.isDelete,jdbcType=TINYINT},
+      </if>
+      <if test="record.isNew != null" >
+        is_new = #{record.isNew,jdbcType=TINYINT},
+      </if>
+      <if test="record.isOwn != null" >
+        is_own = #{record.isOwn,jdbcType=TINYINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.brandId != null" >
+        brand_id = #{record.brandId,jdbcType=INTEGER},
+      </if>
+      <if test="record.publishWait != null" >
+        publish_wait = #{record.publishWait,jdbcType=TINYINT},
+      </if>
+      <if test="record.submitFrom != null" >
+        submit_from = #{record.submitFrom,jdbcType=TINYINT},
+      </if>
+      <if test="record.isRealName != null" >
+        is_real_name = #{record.isRealName,jdbcType=TINYINT},
+      </if>
+      <if test="record.reviewerId != null" >
+        reviewer_id = #{record.reviewerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastReviewerTime != null" >
+        last_reviewer_time = #{record.lastReviewerTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.createUserId != null" >
+        create_user_id = #{record.createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shelvesType != null" >
+        shelves_type = #{record.shelvesType,jdbcType=TINYINT},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdateDate != null" >
+        last_update_date = #{record.lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.auditTime != null" >
+        audit_time = #{record.auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.adsMessage != null" >
+        ads_message = #{record.adsMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seoKeywords != null" >
+        seo_keywords = #{record.seoKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="record.boughtWarning != null" >
+        bought_warning = #{record.boughtWarning,jdbcType=TINYINT},
+      </if>
+      <if test="record.shelvesDate != null" >
+        shelves_date = #{record.shelvesDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update p_goods
+    set id = #{record.id,jdbcType=INTEGER},
+      deal_num = #{record.dealNum,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      supplier_id = #{record.supplierId,jdbcType=INTEGER},
+      agent_id = #{record.agentId,jdbcType=INTEGER},
+      goods_type_id = #{record.goodsTypeId,jdbcType=INTEGER},
+      img = #{record.img,jdbcType=VARCHAR},
+      is_onlive = #{record.isOnlive,jdbcType=TINYINT},
+      begin_time = #{record.beginTime,jdbcType=INTEGER},
+      current_price = #{record.currentPrice,jdbcType=DECIMAL},
+      is_delivery = #{record.isDelivery,jdbcType=TINYINT},
+      is_delete = #{record.isDelete,jdbcType=TINYINT},
+      is_new = #{record.isNew,jdbcType=TINYINT},
+      is_own = #{record.isOwn,jdbcType=TINYINT},
+      create_time = #{record.createTime,jdbcType=INTEGER},
+      update_time = #{record.updateTime,jdbcType=INTEGER},
+      brand_id = #{record.brandId,jdbcType=INTEGER},
+      publish_wait = #{record.publishWait,jdbcType=TINYINT},
+      submit_from = #{record.submitFrom,jdbcType=TINYINT},
+      is_real_name = #{record.isRealName,jdbcType=TINYINT},
+      reviewer_id = #{record.reviewerId,jdbcType=INTEGER},
+      last_reviewer_time = #{record.lastReviewerTime,jdbcType=INTEGER},
+      create_user_id = #{record.createUserId,jdbcType=INTEGER},
+      shelves_type = #{record.shelvesType,jdbcType=TINYINT},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      last_update_date = #{record.lastUpdateDate,jdbcType=TIMESTAMP},
+      audit_time = #{record.auditTime,jdbcType=TIMESTAMP},
+      ads_message = #{record.adsMessage,jdbcType=VARCHAR},
+      seo_keywords = #{record.seoKeywords,jdbcType=VARCHAR},
+      bought_warning = #{record.boughtWarning,jdbcType=TINYINT},
+      shelves_date = #{record.shelvesDate,jdbcType=TIMESTAMP},
+      description = #{record.description,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update p_goods
+    set id = #{record.id,jdbcType=INTEGER},
+      deal_num = #{record.dealNum,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      supplier_id = #{record.supplierId,jdbcType=INTEGER},
+      agent_id = #{record.agentId,jdbcType=INTEGER},
+      goods_type_id = #{record.goodsTypeId,jdbcType=INTEGER},
+      img = #{record.img,jdbcType=VARCHAR},
+      is_onlive = #{record.isOnlive,jdbcType=TINYINT},
+      begin_time = #{record.beginTime,jdbcType=INTEGER},
+      current_price = #{record.currentPrice,jdbcType=DECIMAL},
+      is_delivery = #{record.isDelivery,jdbcType=TINYINT},
+      is_delete = #{record.isDelete,jdbcType=TINYINT},
+      is_new = #{record.isNew,jdbcType=TINYINT},
+      is_own = #{record.isOwn,jdbcType=TINYINT},
+      create_time = #{record.createTime,jdbcType=INTEGER},
+      update_time = #{record.updateTime,jdbcType=INTEGER},
+      brand_id = #{record.brandId,jdbcType=INTEGER},
+      publish_wait = #{record.publishWait,jdbcType=TINYINT},
+      submit_from = #{record.submitFrom,jdbcType=TINYINT},
+      is_real_name = #{record.isRealName,jdbcType=TINYINT},
+      reviewer_id = #{record.reviewerId,jdbcType=INTEGER},
+      last_reviewer_time = #{record.lastReviewerTime,jdbcType=INTEGER},
+      create_user_id = #{record.createUserId,jdbcType=INTEGER},
+      shelves_type = #{record.shelvesType,jdbcType=TINYINT},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      last_update_date = #{record.lastUpdateDate,jdbcType=TIMESTAMP},
+      audit_time = #{record.auditTime,jdbcType=TIMESTAMP},
+      ads_message = #{record.adsMessage,jdbcType=VARCHAR},
+      seo_keywords = #{record.seoKeywords,jdbcType=VARCHAR},
+      bought_warning = #{record.boughtWarning,jdbcType=TINYINT},
+      shelves_date = #{record.shelvesDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qcwoshou.goods.model.Goods" >
+    update p_goods
+    <set >
+      <if test="dealNum != null" >
+        deal_num = #{dealNum,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null" >
+        supplier_id = #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="agentId != null" >
+        agent_id = #{agentId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsTypeId != null" >
+        goods_type_id = #{goodsTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="img != null" >
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="isOnlive != null" >
+        is_onlive = #{isOnlive,jdbcType=TINYINT},
+      </if>
+      <if test="beginTime != null" >
+        begin_time = #{beginTime,jdbcType=INTEGER},
+      </if>
+      <if test="currentPrice != null" >
+        current_price = #{currentPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="isDelivery != null" >
+        is_delivery = #{isDelivery,jdbcType=TINYINT},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=TINYINT},
+      </if>
+      <if test="isNew != null" >
+        is_new = #{isNew,jdbcType=TINYINT},
+      </if>
+      <if test="isOwn != null" >
+        is_own = #{isOwn,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=INTEGER},
+      </if>
+      <if test="brandId != null" >
+        brand_id = #{brandId,jdbcType=INTEGER},
+      </if>
+      <if test="publishWait != null" >
+        publish_wait = #{publishWait,jdbcType=TINYINT},
+      </if>
+      <if test="submitFrom != null" >
+        submit_from = #{submitFrom,jdbcType=TINYINT},
+      </if>
+      <if test="isRealName != null" >
+        is_real_name = #{isRealName,jdbcType=TINYINT},
+      </if>
+      <if test="reviewerId != null" >
+        reviewer_id = #{reviewerId,jdbcType=INTEGER},
+      </if>
+      <if test="lastReviewerTime != null" >
+        last_reviewer_time = #{lastReviewerTime,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="shelvesType != null" >
+        shelves_type = #{shelvesType,jdbcType=TINYINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateDate != null" >
+        last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditTime != null" >
+        audit_time = #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adsMessage != null" >
+        ads_message = #{adsMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="seoKeywords != null" >
+        seo_keywords = #{seoKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="boughtWarning != null" >
+        bought_warning = #{boughtWarning,jdbcType=TINYINT},
+      </if>
+      <if test="shelvesDate != null" >
+        shelves_date = #{shelvesDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.qcwoshou.goods.model.Goods" >
+    update p_goods
+    set deal_num = #{dealNum,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      supplier_id = #{supplierId,jdbcType=INTEGER},
+      agent_id = #{agentId,jdbcType=INTEGER},
+      goods_type_id = #{goodsTypeId,jdbcType=INTEGER},
+      img = #{img,jdbcType=VARCHAR},
+      is_onlive = #{isOnlive,jdbcType=TINYINT},
+      begin_time = #{beginTime,jdbcType=INTEGER},
+      current_price = #{currentPrice,jdbcType=DECIMAL},
+      is_delivery = #{isDelivery,jdbcType=TINYINT},
+      is_delete = #{isDelete,jdbcType=TINYINT},
+      is_new = #{isNew,jdbcType=TINYINT},
+      is_own = #{isOwn,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=INTEGER},
+      brand_id = #{brandId,jdbcType=INTEGER},
+      publish_wait = #{publishWait,jdbcType=TINYINT},
+      submit_from = #{submitFrom,jdbcType=TINYINT},
+      is_real_name = #{isRealName,jdbcType=TINYINT},
+      reviewer_id = #{reviewerId,jdbcType=INTEGER},
+      last_reviewer_time = #{lastReviewerTime,jdbcType=INTEGER},
+      create_user_id = #{createUserId,jdbcType=INTEGER},
+      shelves_type = #{shelvesType,jdbcType=TINYINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      audit_time = #{auditTime,jdbcType=TIMESTAMP},
+      ads_message = #{adsMessage,jdbcType=VARCHAR},
+      seo_keywords = #{seoKeywords,jdbcType=VARCHAR},
+      bought_warning = #{boughtWarning,jdbcType=TINYINT},
+      shelves_date = #{shelvesDate,jdbcType=TIMESTAMP},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qcwoshou.goods.model.Goods" >
+    update p_goods
+    set deal_num = #{dealNum,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      supplier_id = #{supplierId,jdbcType=INTEGER},
+      agent_id = #{agentId,jdbcType=INTEGER},
+      goods_type_id = #{goodsTypeId,jdbcType=INTEGER},
+      img = #{img,jdbcType=VARCHAR},
+      is_onlive = #{isOnlive,jdbcType=TINYINT},
+      begin_time = #{beginTime,jdbcType=INTEGER},
+      current_price = #{currentPrice,jdbcType=DECIMAL},
+      is_delivery = #{isDelivery,jdbcType=TINYINT},
+      is_delete = #{isDelete,jdbcType=TINYINT},
+      is_new = #{isNew,jdbcType=TINYINT},
+      is_own = #{isOwn,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=INTEGER},
+      brand_id = #{brandId,jdbcType=INTEGER},
+      publish_wait = #{publishWait,jdbcType=TINYINT},
+      submit_from = #{submitFrom,jdbcType=TINYINT},
+      is_real_name = #{isRealName,jdbcType=TINYINT},
+      reviewer_id = #{reviewerId,jdbcType=INTEGER},
+      last_reviewer_time = #{lastReviewerTime,jdbcType=INTEGER},
+      create_user_id = #{createUserId,jdbcType=INTEGER},
+      shelves_type = #{shelvesType,jdbcType=TINYINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      audit_time = #{auditTime,jdbcType=TIMESTAMP},
+      ads_message = #{adsMessage,jdbcType=VARCHAR},
+      seo_keywords = #{seoKeywords,jdbcType=VARCHAR},
+      bought_warning = #{boughtWarning,jdbcType=TINYINT},
+      shelves_date = #{shelvesDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

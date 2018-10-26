@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qcwoshou.goods.dao.GoodsSkuMapper" >
+  <resultMap id="BaseResultMap" type="com.qcwoshou.goods.model.GoodsSku" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="sku_number" property="skuNumber" jdbcType="VARCHAR" />
+    <result column="model_number" property="modelNumber" jdbcType="VARCHAR" />
+    <result column="sku_title" property="skuTitle" jdbcType="VARCHAR" />
+    <result column="max_bought" property="maxBought" jdbcType="INTEGER" />
+    <result column="bought" property="bought" jdbcType="INTEGER" />
+    <result column="sku_img" property="skuImg" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="TINYINT" />
+    <result column="origin_price" property="originPrice" jdbcType="DECIMAL" />
+    <result column="current_price" property="currentPrice" jdbcType="DECIMAL" />
+    <result column="balance_price" property="balancePrice" jdbcType="DECIMAL" />
+    <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
+    <result column="min_buy_count" property="minBuyCount" jdbcType="INTEGER" />
+    <result column="max_buy_count" property="maxBuyCount" jdbcType="INTEGER" />
+    <result column="use_score" property="useScore" jdbcType="TINYINT" />
+    <result column="integral_use_ratio" property="integralUseRatio" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, goods_id, sku_number, model_number, sku_title, max_bought, bought, sku_img, sort, 
+    origin_price, current_price, balance_price, is_delete, min_buy_count, max_buy_count, 
+    use_score, integral_use_ratio
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qcwoshou.goods.model.GoodsSkuExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from p_goods_sku
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from p_goods_sku
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from p_goods_sku
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qcwoshou.goods.model.GoodsSkuExample" >
+    delete from p_goods_sku
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qcwoshou.goods.model.GoodsSku" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into p_goods_sku (goods_id, sku_number, model_number, 
+      sku_title, max_bought, bought, 
+      sku_img, sort, origin_price, 
+      current_price, balance_price, is_delete, 
+      min_buy_count, max_buy_count, use_score, 
+      integral_use_ratio)
+    values (#{goodsId,jdbcType=INTEGER}, #{skuNumber,jdbcType=VARCHAR}, #{modelNumber,jdbcType=VARCHAR}, 
+      #{skuTitle,jdbcType=VARCHAR}, #{maxBought,jdbcType=INTEGER}, #{bought,jdbcType=INTEGER}, 
+      #{skuImg,jdbcType=VARCHAR}, #{sort,jdbcType=TINYINT}, #{originPrice,jdbcType=DECIMAL}, 
+      #{currentPrice,jdbcType=DECIMAL}, #{balancePrice,jdbcType=DECIMAL}, #{isDelete,jdbcType=TINYINT}, 
+      #{minBuyCount,jdbcType=INTEGER}, #{maxBuyCount,jdbcType=INTEGER}, #{useScore,jdbcType=TINYINT}, 
+      #{integralUseRatio,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qcwoshou.goods.model.GoodsSku" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into p_goods_sku
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="skuNumber != null" >
+        sku_number,
+      </if>
+      <if test="modelNumber != null" >
+        model_number,
+      </if>
+      <if test="skuTitle != null" >
+        sku_title,
+      </if>
+      <if test="maxBought != null" >
+        max_bought,
+      </if>
+      <if test="bought != null" >
+        bought,
+      </if>
+      <if test="skuImg != null" >
+        sku_img,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="originPrice != null" >
+        origin_price,
+      </if>
+      <if test="currentPrice != null" >
+        current_price,
+      </if>
+      <if test="balancePrice != null" >
+        balance_price,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+      <if test="minBuyCount != null" >
+        min_buy_count,
+      </if>
+      <if test="maxBuyCount != null" >
+        max_buy_count,
+      </if>
+      <if test="useScore != null" >
+        use_score,
+      </if>
+      <if test="integralUseRatio != null" >
+        integral_use_ratio,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="skuNumber != null" >
+        #{skuNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="modelNumber != null" >
+        #{modelNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="skuTitle != null" >
+        #{skuTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="maxBought != null" >
+        #{maxBought,jdbcType=INTEGER},
+      </if>
+      <if test="bought != null" >
+        #{bought,jdbcType=INTEGER},
+      </if>
+      <if test="skuImg != null" >
+        #{skuImg,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=TINYINT},
+      </if>
+      <if test="originPrice != null" >
+        #{originPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="currentPrice != null" >
+        #{currentPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="balancePrice != null" >
+        #{balancePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=TINYINT},
+      </if>
+      <if test="minBuyCount != null" >
+        #{minBuyCount,jdbcType=INTEGER},
+      </if>
+      <if test="maxBuyCount != null" >
+        #{maxBuyCount,jdbcType=INTEGER},
+      </if>
+      <if test="useScore != null" >
+        #{useScore,jdbcType=TINYINT},
+      </if>
+      <if test="integralUseRatio != null" >
+        #{integralUseRatio,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qcwoshou.goods.model.GoodsSkuExample" resultType="java.lang.Integer" >
+    select count(*) from p_goods_sku
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update p_goods_sku
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsId != null" >
+        goods_id = #{record.goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.skuNumber != null" >
+        sku_number = #{record.skuNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelNumber != null" >
+        model_number = #{record.modelNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skuTitle != null" >
+        sku_title = #{record.skuTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maxBought != null" >
+        max_bought = #{record.maxBought,jdbcType=INTEGER},
+      </if>
+      <if test="record.bought != null" >
+        bought = #{record.bought,jdbcType=INTEGER},
+      </if>
+      <if test="record.skuImg != null" >
+        sku_img = #{record.skuImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=TINYINT},
+      </if>
+      <if test="record.originPrice != null" >
+        origin_price = #{record.originPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.currentPrice != null" >
+        current_price = #{record.currentPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.balancePrice != null" >
+        balance_price = #{record.balancePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isDelete != null" >
+        is_delete = #{record.isDelete,jdbcType=TINYINT},
+      </if>
+      <if test="record.minBuyCount != null" >
+        min_buy_count = #{record.minBuyCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.maxBuyCount != null" >
+        max_buy_count = #{record.maxBuyCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.useScore != null" >
+        use_score = #{record.useScore,jdbcType=TINYINT},
+      </if>
+      <if test="record.integralUseRatio != null" >
+        integral_use_ratio = #{record.integralUseRatio,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update p_goods_sku
+    set id = #{record.id,jdbcType=INTEGER},
+      goods_id = #{record.goodsId,jdbcType=INTEGER},
+      sku_number = #{record.skuNumber,jdbcType=VARCHAR},
+      model_number = #{record.modelNumber,jdbcType=VARCHAR},
+      sku_title = #{record.skuTitle,jdbcType=VARCHAR},
+      max_bought = #{record.maxBought,jdbcType=INTEGER},
+      bought = #{record.bought,jdbcType=INTEGER},
+      sku_img = #{record.skuImg,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=TINYINT},
+      origin_price = #{record.originPrice,jdbcType=DECIMAL},
+      current_price = #{record.currentPrice,jdbcType=DECIMAL},
+      balance_price = #{record.balancePrice,jdbcType=DECIMAL},
+      is_delete = #{record.isDelete,jdbcType=TINYINT},
+      min_buy_count = #{record.minBuyCount,jdbcType=INTEGER},
+      max_buy_count = #{record.maxBuyCount,jdbcType=INTEGER},
+      use_score = #{record.useScore,jdbcType=TINYINT},
+      integral_use_ratio = #{record.integralUseRatio,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qcwoshou.goods.model.GoodsSku" >
+    update p_goods_sku
+    <set >
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="skuNumber != null" >
+        sku_number = #{skuNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="modelNumber != null" >
+        model_number = #{modelNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="skuTitle != null" >
+        sku_title = #{skuTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="maxBought != null" >
+        max_bought = #{maxBought,jdbcType=INTEGER},
+      </if>
+      <if test="bought != null" >
+        bought = #{bought,jdbcType=INTEGER},
+      </if>
+      <if test="skuImg != null" >
+        sku_img = #{skuImg,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=TINYINT},
+      </if>
+      <if test="originPrice != null" >
+        origin_price = #{originPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="currentPrice != null" >
+        current_price = #{currentPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="balancePrice != null" >
+        balance_price = #{balancePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=TINYINT},
+      </if>
+      <if test="minBuyCount != null" >
+        min_buy_count = #{minBuyCount,jdbcType=INTEGER},
+      </if>
+      <if test="maxBuyCount != null" >
+        max_buy_count = #{maxBuyCount,jdbcType=INTEGER},
+      </if>
+      <if test="useScore != null" >
+        use_score = #{useScore,jdbcType=TINYINT},
+      </if>
+      <if test="integralUseRatio != null" >
+        integral_use_ratio = #{integralUseRatio,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qcwoshou.goods.model.GoodsSku" >
+    update p_goods_sku
+    set goods_id = #{goodsId,jdbcType=INTEGER},
+      sku_number = #{skuNumber,jdbcType=VARCHAR},
+      model_number = #{modelNumber,jdbcType=VARCHAR},
+      sku_title = #{skuTitle,jdbcType=VARCHAR},
+      max_bought = #{maxBought,jdbcType=INTEGER},
+      bought = #{bought,jdbcType=INTEGER},
+      sku_img = #{skuImg,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=TINYINT},
+      origin_price = #{originPrice,jdbcType=DECIMAL},
+      current_price = #{currentPrice,jdbcType=DECIMAL},
+      balance_price = #{balancePrice,jdbcType=DECIMAL},
+      is_delete = #{isDelete,jdbcType=TINYINT},
+      min_buy_count = #{minBuyCount,jdbcType=INTEGER},
+      max_buy_count = #{maxBuyCount,jdbcType=INTEGER},
+      use_score = #{useScore,jdbcType=TINYINT},
+      integral_use_ratio = #{integralUseRatio,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

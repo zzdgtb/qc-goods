@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qcwoshou.goods.dao.BrandMapper" >
+  <resultMap id="BaseResultMap" type="com.qcwoshou.goods.model.Brand" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="logo" property="logo" jdbcType="VARCHAR" />
+    <result column="brand_promote_logo" property="brandPromoteLogo" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="shop_cate_id" property="shopCateId" jdbcType="INTEGER" />
+    <result column="brand_promote" property="brandPromote" jdbcType="BIT" />
+    <result column="begin_time" property="beginTime" jdbcType="INTEGER" />
+    <result column="end_time" property="endTime" jdbcType="INTEGER" />
+    <result column="time_status" property="timeStatus" jdbcType="BIT" />
+    <result column="dy_count" property="dyCount" jdbcType="INTEGER" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+    <result column="use_id" property="useId" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.qcwoshou.goods.model.BrandWithBLOBs" extends="BaseResultMap" >
+    <result column="brief" property="brief" jdbcType="LONGVARCHAR" />
+    <result column="tag" property="tag" jdbcType="LONGVARCHAR" />
+    <result column="tag_match" property="tagMatch" jdbcType="LONGVARCHAR" />
+    <result column="tag_match_row" property="tagMatchRow" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, logo, brand_promote_logo, sort, shop_cate_id, brand_promote, begin_time, 
+    end_time, time_status, dy_count, is_delete, use_id
+  </sql>
+  <sql id="Blob_Column_List" >
+    brief, tag, tag_match, tag_match_row
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.qcwoshou.goods.model.BrandExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from brand
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qcwoshou.goods.model.BrandExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from brand
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from brand
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from brand
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qcwoshou.goods.model.BrandExample" >
+    delete from brand
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qcwoshou.goods.model.BrandWithBLOBs" useGeneratedKeys="true" keyProperty="id">
+    insert into brand (id, name, logo, 
+      brand_promote_logo, sort, shop_cate_id, 
+      brand_promote, begin_time, end_time, 
+      time_status, dy_count, is_delete, 
+      use_id, brief, tag, 
+      tag_match, tag_match_row)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, 
+      #{brandPromoteLogo,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{shopCateId,jdbcType=INTEGER}, 
+      #{brandPromote,jdbcType=BIT}, #{beginTime,jdbcType=INTEGER}, #{endTime,jdbcType=INTEGER}, 
+      #{timeStatus,jdbcType=BIT}, #{dyCount,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, 
+      #{useId,jdbcType=INTEGER}, #{brief,jdbcType=LONGVARCHAR}, #{tag,jdbcType=LONGVARCHAR}, 
+      #{tagMatch,jdbcType=LONGVARCHAR}, #{tagMatchRow,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qcwoshou.goods.model.BrandWithBLOBs" >
+    insert into brand
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="logo != null" >
+        logo,
+      </if>
+      <if test="brandPromoteLogo != null" >
+        brand_promote_logo,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="shopCateId != null" >
+        shop_cate_id,
+      </if>
+      <if test="brandPromote != null" >
+        brand_promote,
+      </if>
+      <if test="beginTime != null" >
+        begin_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="timeStatus != null" >
+        time_status,
+      </if>
+      <if test="dyCount != null" >
+        dy_count,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+      <if test="useId != null" >
+        use_id,
+      </if>
+      <if test="brief != null" >
+        brief,
+      </if>
+      <if test="tag != null" >
+        tag,
+      </if>
+      <if test="tagMatch != null" >
+        tag_match,
+      </if>
+      <if test="tagMatchRow != null" >
+        tag_match_row,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null" >
+        #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="brandPromoteLogo != null" >
+        #{brandPromoteLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="shopCateId != null" >
+        #{shopCateId,jdbcType=INTEGER},
+      </if>
+      <if test="brandPromote != null" >
+        #{brandPromote,jdbcType=BIT},
+      </if>
+      <if test="beginTime != null" >
+        #{beginTime,jdbcType=INTEGER},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=INTEGER},
+      </if>
+      <if test="timeStatus != null" >
+        #{timeStatus,jdbcType=BIT},
+      </if>
+      <if test="dyCount != null" >
+        #{dyCount,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="useId != null" >
+        #{useId,jdbcType=INTEGER},
+      </if>
+      <if test="brief != null" >
+        #{brief,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="tag != null" >
+        #{tag,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="tagMatch != null" >
+        #{tagMatch,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="tagMatchRow != null" >
+        #{tagMatchRow,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qcwoshou.goods.model.BrandExample" resultType="java.lang.Integer" >
+    select count(*) from brand
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update brand
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logo != null" >
+        logo = #{record.logo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandPromoteLogo != null" >
+        brand_promote_logo = #{record.brandPromoteLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopCateId != null" >
+        shop_cate_id = #{record.shopCateId,jdbcType=INTEGER},
+      </if>
+      <if test="record.brandPromote != null" >
+        brand_promote = #{record.brandPromote,jdbcType=BIT},
+      </if>
+      <if test="record.beginTime != null" >
+        begin_time = #{record.beginTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.endTime != null" >
+        end_time = #{record.endTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.timeStatus != null" >
+        time_status = #{record.timeStatus,jdbcType=BIT},
+      </if>
+      <if test="record.dyCount != null" >
+        dy_count = #{record.dyCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.isDelete != null" >
+        is_delete = #{record.isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="record.useId != null" >
+        use_id = #{record.useId,jdbcType=INTEGER},
+      </if>
+      <if test="record.brief != null" >
+        brief = #{record.brief,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.tag != null" >
+        tag = #{record.tag,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.tagMatch != null" >
+        tag_match = #{record.tagMatch,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.tagMatchRow != null" >
+        tag_match_row = #{record.tagMatchRow,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update brand
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      logo = #{record.logo,jdbcType=VARCHAR},
+      brand_promote_logo = #{record.brandPromoteLogo,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=INTEGER},
+      shop_cate_id = #{record.shopCateId,jdbcType=INTEGER},
+      brand_promote = #{record.brandPromote,jdbcType=BIT},
+      begin_time = #{record.beginTime,jdbcType=INTEGER},
+      end_time = #{record.endTime,jdbcType=INTEGER},
+      time_status = #{record.timeStatus,jdbcType=BIT},
+      dy_count = #{record.dyCount,jdbcType=INTEGER},
+      is_delete = #{record.isDelete,jdbcType=INTEGER},
+      use_id = #{record.useId,jdbcType=INTEGER},
+      brief = #{record.brief,jdbcType=LONGVARCHAR},
+      tag = #{record.tag,jdbcType=LONGVARCHAR},
+      tag_match = #{record.tagMatch,jdbcType=LONGVARCHAR},
+      tag_match_row = #{record.tagMatchRow,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update brand
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      logo = #{record.logo,jdbcType=VARCHAR},
+      brand_promote_logo = #{record.brandPromoteLogo,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=INTEGER},
+      shop_cate_id = #{record.shopCateId,jdbcType=INTEGER},
+      brand_promote = #{record.brandPromote,jdbcType=BIT},
+      begin_time = #{record.beginTime,jdbcType=INTEGER},
+      end_time = #{record.endTime,jdbcType=INTEGER},
+      time_status = #{record.timeStatus,jdbcType=BIT},
+      dy_count = #{record.dyCount,jdbcType=INTEGER},
+      is_delete = #{record.isDelete,jdbcType=INTEGER},
+      use_id = #{record.useId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qcwoshou.goods.model.BrandWithBLOBs" >
+    update brand
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null" >
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="brandPromoteLogo != null" >
+        brand_promote_logo = #{brandPromoteLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="shopCateId != null" >
+        shop_cate_id = #{shopCateId,jdbcType=INTEGER},
+      </if>
+      <if test="brandPromote != null" >
+        brand_promote = #{brandPromote,jdbcType=BIT},
+      </if>
+      <if test="beginTime != null" >
+        begin_time = #{beginTime,jdbcType=INTEGER},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=INTEGER},
+      </if>
+      <if test="timeStatus != null" >
+        time_status = #{timeStatus,jdbcType=BIT},
+      </if>
+      <if test="dyCount != null" >
+        dy_count = #{dyCount,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="useId != null" >
+        use_id = #{useId,jdbcType=INTEGER},
+      </if>
+      <if test="brief != null" >
+        brief = #{brief,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="tag != null" >
+        tag = #{tag,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="tagMatch != null" >
+        tag_match = #{tagMatch,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="tagMatchRow != null" >
+        tag_match_row = #{tagMatchRow,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.qcwoshou.goods.model.BrandWithBLOBs" >
+    update brand
+    set name = #{name,jdbcType=VARCHAR},
+      logo = #{logo,jdbcType=VARCHAR},
+      brand_promote_logo = #{brandPromoteLogo,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      shop_cate_id = #{shopCateId,jdbcType=INTEGER},
+      brand_promote = #{brandPromote,jdbcType=BIT},
+      begin_time = #{beginTime,jdbcType=INTEGER},
+      end_time = #{endTime,jdbcType=INTEGER},
+      time_status = #{timeStatus,jdbcType=BIT},
+      dy_count = #{dyCount,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      use_id = #{useId,jdbcType=INTEGER},
+      brief = #{brief,jdbcType=LONGVARCHAR},
+      tag = #{tag,jdbcType=LONGVARCHAR},
+      tag_match = #{tagMatch,jdbcType=LONGVARCHAR},
+      tag_match_row = #{tagMatchRow,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qcwoshou.goods.model.Brand" >
+    update brand
+    set name = #{name,jdbcType=VARCHAR},
+      logo = #{logo,jdbcType=VARCHAR},
+      brand_promote_logo = #{brandPromoteLogo,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      shop_cate_id = #{shopCateId,jdbcType=INTEGER},
+      brand_promote = #{brandPromote,jdbcType=BIT},
+      begin_time = #{beginTime,jdbcType=INTEGER},
+      end_time = #{endTime,jdbcType=INTEGER},
+      time_status = #{timeStatus,jdbcType=BIT},
+      dy_count = #{dyCount,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      use_id = #{useId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
