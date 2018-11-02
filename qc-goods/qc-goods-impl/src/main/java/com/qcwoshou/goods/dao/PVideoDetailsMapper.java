@@ -1,5 +1,8 @@
 package com.qcwoshou.goods.dao;
 
+import com.qcwoshou.goods.dto.request.VideosCollectListRequest;
+import com.qcwoshou.goods.dto.request.VideosListRequest;
+import com.qcwoshou.goods.dto.response.VideoDetailsResponse;
 import com.qcwoshou.goods.model.PVideoDetails;
 import com.qcwoshou.goods.model.PVideoDetailsExample;
 import java.util.List;
@@ -27,4 +30,8 @@ public interface PVideoDetailsMapper {
     int updateByPrimaryKeySelective(PVideoDetails record);
 
     int updateByPrimaryKey(PVideoDetails record);
+
+    List<VideoDetailsResponse> getCollectVideoList(VideosCollectListRequest video);
+
+    List<VideoDetailsResponse> getVideoList(VideosListRequest video);
 }

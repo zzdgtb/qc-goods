@@ -48,13 +48,26 @@
     </javaClientGenerator>
     
     <!-- 要对那些数据表进行生成操作，必须要有一个. -->
-    <table schema="mybatis" tableName="p_video" domainObjectName="PVideo"
-    enableCountByExample="true" enableUpdateByExample="true"
-    enableDeleteByExample="true" enableSelectByExample="true"
-    selectByExampleQueryId="true">
-    <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-  </table>
-    <table schema="mybatis" tableName="p_follow" domainObjectName="PFollow"
+    <!--<table schema="mybatis" tableName="p_live_info" domainObjectName="PLiveInfo"
+           enableCountByExample="true" enableUpdateByExample="true"
+           enableDeleteByExample="true" enableSelectByExample="true"
+           selectByExampleQueryId="true">
+      <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+    </table>-->
+    <!--<table schema="mybatis" tableName="p_transmit" domainObjectName="PTransmit"
+           enableCountByExample="true" enableUpdateByExample="true"
+           enableDeleteByExample="true" enableSelectByExample="true"
+           selectByExampleQueryId="true">
+      <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+    </table>-->
+    <table schema="mybatis" tableName="p_collect" domainObjectName="PCollect"
+           enableCountByExample="true" enableUpdateByExample="true"
+           enableDeleteByExample="true" enableSelectByExample="true"
+           selectByExampleQueryId="true">
+      <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+    </table>
+
+    <!--<table schema="mybatis" tableName="p_follow" domainObjectName="PFollow"
                     enableCountByExample="true" enableUpdateByExample="true"
                     enableDeleteByExample="true" enableSelectByExample="true"
                     selectByExampleQueryId="true">
@@ -113,6 +126,6 @@
            enableDeleteByExample="true" enableSelectByExample="true"
            selectByExampleQueryId="true">
       <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-    </table>
+    </table>-->
   </context>
 </generatorConfiguration>

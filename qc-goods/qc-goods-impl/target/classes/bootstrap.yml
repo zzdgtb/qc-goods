@@ -1,5 +1,0 @@
-server:
-  port: ${PORT:10500}
-#spring:
-  #application:
-    #name: qc-goods

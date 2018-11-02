@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.qcwoshou.goods.dao.PFollowMapper" >
   <resultMap id="BaseResultMap" type="com.qcwoshou.goods.model.PFollow" >
-    <result column="id" property="id" jdbcType="BIGINT" />
+    <id column="id" property="id" jdbcType="BIGINT" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="video_code" property="videoCode" jdbcType="VARCHAR" />
-    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
-    <result column="id_del" property="idDel" jdbcType="CHAR" />
+    <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, user_id, video_code, create_by, create_date, update_date, id_del
+    id, user_id, video_code, create_by, create_date, update_date, is_delete
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qcwoshou.goods.model.PFollowExample" >
     select
@@ -86,6 +86,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from p_follow
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from p_follow
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
   <delete id="deleteByExample" parameterType="com.qcwoshou.goods.model.PFollowExample" >
     delete from p_follow
     <if test="_parameter != null" >
@@ -97,10 +107,10 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into p_follow (user_id, video_code, create_by, 
-      create_date, update_date, id_del
+      create_date, update_date, is_delete
       )
-    values (#{userId,jdbcType=BIGINT}, #{videoCode,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{idDel,jdbcType=CHAR}
+    values (#{userId,jdbcType=BIGINT}, #{videoCode,jdbcType=VARCHAR}, #{createBy,jdbcType=BIGINT}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=TINYINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.qcwoshou.goods.model.PFollow" >
@@ -124,8 +134,8 @@
       <if test="updateDate != null" >
         update_date,
       </if>
-      <if test="idDel != null" >
-        id_del,
+      <if test="isDelete != null" >
+        is_delete,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -136,7 +146,7 @@
         #{videoCode,jdbcType=VARCHAR},
       </if>
       <if test="createBy != null" >
-        #{createBy,jdbcType=VARCHAR},
+        #{createBy,jdbcType=BIGINT},
       </if>
       <if test="createDate != null" >
         #{createDate,jdbcType=TIMESTAMP},
@@ -144,8 +154,8 @@
       <if test="updateDate != null" >
         #{updateDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="idDel != null" >
-        #{idDel,jdbcType=CHAR},
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -168,7 +178,7 @@
         video_code = #{record.videoCode,jdbcType=VARCHAR},
       </if>
       <if test="record.createBy != null" >
-        create_by = #{record.createBy,jdbcType=VARCHAR},
+        create_by = #{record.createBy,jdbcType=BIGINT},
       </if>
       <if test="record.createDate != null" >
         create_date = #{record.createDate,jdbcType=TIMESTAMP},
@@ -176,8 +186,8 @@
       <if test="record.updateDate != null" >
         update_date = #{record.updateDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.idDel != null" >
-        id_del = #{record.idDel,jdbcType=CHAR},
+      <if test="record.isDelete != null" >
+        is_delete = #{record.isDelete,jdbcType=TINYINT},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -189,12 +199,46 @@
     set id = #{record.id,jdbcType=BIGINT},
       user_id = #{record.userId,jdbcType=BIGINT},
       video_code = #{record.videoCode,jdbcType=VARCHAR},
-      create_by = #{record.createBy,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=BIGINT},
       create_date = #{record.createDate,jdbcType=TIMESTAMP},
       update_date = #{record.updateDate,jdbcType=TIMESTAMP},
-      id_del = #{record.idDel,jdbcType=CHAR}
+      is_delete = #{record.isDelete,jdbcType=TINYINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qcwoshou.goods.model.PFollow" >
+    update p_follow
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="videoCode != null" >
+        video_code = #{videoCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qcwoshou.goods.model.PFollow" >
+    update p_follow
+    set user_id = #{userId,jdbcType=BIGINT},
+      video_code = #{videoCode,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      is_delete = #{isDelete,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

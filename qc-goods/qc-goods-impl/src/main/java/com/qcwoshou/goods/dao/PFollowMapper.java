@@ -10,13 +10,21 @@ public interface PFollowMapper {
 
     int deleteByExample(PFollowExample example);
 
+    int deleteByPrimaryKey(Long id);
+
     int insert(PFollow record);
 
     int insertSelective(PFollow record);
 
     List<PFollow> selectByExample(PFollowExample example);
 
+    PFollow selectByPrimaryKey(Long id);
+
     int updateByExampleSelective(@Param("record") PFollow record, @Param("example") PFollowExample example);
 
     int updateByExample(@Param("record") PFollow record, @Param("example") PFollowExample example);
+
+    int updateByPrimaryKeySelective(PFollow record);
+
+    int updateByPrimaryKey(PFollow record);
 }

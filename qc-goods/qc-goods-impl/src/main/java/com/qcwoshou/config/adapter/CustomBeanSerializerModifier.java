@@ -36,6 +36,8 @@ public class CustomBeanSerializerModifier extends BeanSerializerModifier {
         	writer.assignNullSerializer(new NullListJsonSerializer());
           }else if(writer.getType().getRawClass().equals(Set.class)){
         	writer.assignNullSerializer(new NullSetJsonSerializer());
+          }else{
+              writer.assignNullSerializer(new NullObjectJsonSerializer());
           }
       }
       return beanProperties;

@@ -235,6 +235,66 @@ public class PVideoDetailsExample {
             return (Criteria) this;
         }
 
+        public Criteria andLiveInfoIdIsNull() {
+            addCriterion("live_info_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLiveInfoIdIsNotNull() {
+            addCriterion("live_info_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLiveInfoIdEqualTo(Long value) {
+            addCriterion("live_info_id =", value, "liveInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLiveInfoIdNotEqualTo(Long value) {
+            addCriterion("live_info_id <>", value, "liveInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLiveInfoIdGreaterThan(Long value) {
+            addCriterion("live_info_id >", value, "liveInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLiveInfoIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("live_info_id >=", value, "liveInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLiveInfoIdLessThan(Long value) {
+            addCriterion("live_info_id <", value, "liveInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLiveInfoIdLessThanOrEqualTo(Long value) {
+            addCriterion("live_info_id <=", value, "liveInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLiveInfoIdIn(List<Long> values) {
+            addCriterion("live_info_id in", values, "liveInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLiveInfoIdNotIn(List<Long> values) {
+            addCriterion("live_info_id not in", values, "liveInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLiveInfoIdBetween(Long value1, Long value2) {
+            addCriterion("live_info_id between", value1, value2, "liveInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLiveInfoIdNotBetween(Long value1, Long value2) {
+            addCriterion("live_info_id not between", value1, value2, "liveInfoId");
+            return (Criteria) this;
+        }
+
         public Criteria andPushLiveUrlIsNull() {
             addCriterion("push_live_url is null");
             return (Criteria) this;
@@ -632,6 +692,66 @@ public class PVideoDetailsExample {
 
         public Criteria andRealEndLivetimeNotBetween(Date value1, Date value2) {
             addCriterion("real_end_livetime not between", value1, value2, "realEndLivetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEndLiveIsNull() {
+            addCriterion("is_end_live is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEndLiveIsNotNull() {
+            addCriterion("is_end_live is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEndLiveEqualTo(Byte value) {
+            addCriterion("is_end_live =", value, "isEndLive");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEndLiveNotEqualTo(Byte value) {
+            addCriterion("is_end_live <>", value, "isEndLive");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEndLiveGreaterThan(Byte value) {
+            addCriterion("is_end_live >", value, "isEndLive");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEndLiveGreaterThanOrEqualTo(Byte value) {
+            addCriterion("is_end_live >=", value, "isEndLive");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEndLiveLessThan(Byte value) {
+            addCriterion("is_end_live <", value, "isEndLive");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEndLiveLessThanOrEqualTo(Byte value) {
+            addCriterion("is_end_live <=", value, "isEndLive");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEndLiveIn(List<Byte> values) {
+            addCriterion("is_end_live in", values, "isEndLive");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEndLiveNotIn(List<Byte> values) {
+            addCriterion("is_end_live not in", values, "isEndLive");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEndLiveBetween(Byte value1, Byte value2) {
+            addCriterion("is_end_live between", value1, value2, "isEndLive");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsEndLiveNotBetween(Byte value1, Byte value2) {
+            addCriterion("is_end_live not between", value1, value2, "isEndLive");
             return (Criteria) this;
         }
 

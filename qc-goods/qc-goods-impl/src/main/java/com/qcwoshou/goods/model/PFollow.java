@@ -9,13 +9,13 @@ public class PFollow {
 
     private String videoCode;
 
-    private String createBy;
+    private Long createBy;
 
     private Date createDate;
 
     private Date updateDate;
 
-    private String idDel;
+    private Byte isDelete;
 
     public Long getId() {
         return id;
@@ -41,12 +41,12 @@ public class PFollow {
         this.videoCode = videoCode == null ? null : videoCode.trim();
     }
 
-    public String getCreateBy() {
+    public Long getCreateBy() {
         return createBy;
     }
 
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy == null ? null : createBy.trim();
+    public void setCreateBy(Long createBy) {
+        this.createBy = createBy;
     }
 
     public Date getCreateDate() {
@@ -65,11 +65,11 @@ public class PFollow {
         this.updateDate = updateDate;
     }
 
-    public String getIdDel() {
-        return idDel;
+    public Byte getIsDelete() {
+        return isDelete;
     }
 
-    public void setIdDel(String idDel) {
-        this.idDel = idDel == null ? null : idDel.trim();
+    public void setIsDelete(Byte isDelete) {
+        this.isDelete = isDelete;
     }
 }

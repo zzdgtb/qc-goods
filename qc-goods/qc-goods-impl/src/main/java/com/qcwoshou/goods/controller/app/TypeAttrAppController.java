@@ -1,3 +1,4 @@
+/*
 package com.qcwoshou.goods.controller.app;
 
 import com.qcwoshou.core.dto.result.BaseCommonResult;
@@ -32,3 +33,4 @@ public class TypeAttrAppController {
 	
 	
 }
+*/

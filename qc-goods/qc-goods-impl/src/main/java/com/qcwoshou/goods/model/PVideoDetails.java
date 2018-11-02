@@ -7,6 +7,8 @@ public class PVideoDetails {
 
     private String videoCode;
 
+    private Long liveInfoId;
+
     private String pushLiveUrl;
 
     private String playLiveUrl;
@@ -18,6 +20,8 @@ public class PVideoDetails {
     private Date realBeginLivetime;
 
     private Date realEndLivetime;
+
+    private Integer isEndLive;
 
     private Integer createUserId;
 
@@ -41,6 +45,14 @@ public class PVideoDetails {
 
     public void setVideoCode(String videoCode) {
         this.videoCode = videoCode == null ? null : videoCode.trim();
+    }
+
+    public Long getLiveInfoId() {
+        return liveInfoId;
+    }
+
+    public void setLiveInfoId(Long liveInfoId) {
+        this.liveInfoId = liveInfoId;
     }
 
     public String getPushLiveUrl() {
@@ -89,6 +101,14 @@ public class PVideoDetails {
 
     public void setRealEndLivetime(Date realEndLivetime) {
         this.realEndLivetime = realEndLivetime;
+    }
+
+    public Integer getIsEndLive() {
+        return isEndLive;
+    }
+
+    public void setIsEndLive(Integer isEndLive) {
+        this.isEndLive = isEndLive;
     }
 
     public Integer getCreateUserId() {

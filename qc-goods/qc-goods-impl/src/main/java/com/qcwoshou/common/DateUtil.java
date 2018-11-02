@@ -56,6 +56,11 @@ public class DateUtil {
         Date da = new Date(curren);
         return da;
     }
+    public static long getminisBetweenTwoDate(Date date1,Date date2){
+       return date1.after(date2)?
+               (date1.getTime()-date2.getTime())/(1000*60):
+               (date2.getTime()-date1.getTime())/(1000*60);
+    }
     /**
      * 获取现在时间
      *
@@ -885,6 +890,7 @@ public class DateUtil {
         String t = df.format(d);
         epoch = df.parse(t).getTime() / 1000;
         System.out.println("t is ：" + t + ",unix stamp is " + epoch);
+        System.out.println(2/3);
 
     }
 

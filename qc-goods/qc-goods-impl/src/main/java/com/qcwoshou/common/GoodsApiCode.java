@@ -132,12 +132,86 @@ public class GoodsApiCode extends BaseApiCode {
 	public static final Integer GOODS_IS_OFFLINE = 10870;
 
 	//-------------------------------------------vedio---10871--->10899------------------------------
-	/**直播开始时间未大于当前时间10分钟**/
-	public static final Integer VEDIOS_BEGIN_LIVETIME_TOO_SMALL = 10871;
+	/**开播时间与预播时间不一致，偏差大于10分钟**/
+	public static final Integer VEDIOS_BEGIN_LIVETIME_UN_SAME = 10871;
 
 	/**直播结束时间不能为空且要大于直播开始时间**/
 	public static final Integer VEDIOS_END_LIVETIME_IS_NULL = 10872;
-	
+	/**
+	 * 新增视频开播信息失败
+	 */
+	public static final Integer VEDIOS_ADD_FAIL = 10873;
+	/**
+	 *视频开播失败
+	 */
+	public static final Integer VEDIOS_LIVE_FAIL = 10874;
+	/**
+	 *获取视频开播列表失败
+	 */
+	public static final Integer VEDIOS_LIST_FAIL = 10875;
+	/**
+	 * 删除开播信息失败
+	 */
+	public static final Integer VEDIOS_DELETE_FAIL = 10876;
+	/**
+	 * 转发开播信息失败
+	 */
+	public static final Integer VEDIOS_TRANSMIT_FAIL = 10877;
+	/**
+	 * 查看开播信息详情失败
+	 */
+	public static final Integer VEDIOS_VIEW_FAIL = 10878;
+	/**
+	 * 创建群组失败
+	 */
+	public static final Integer IM_CREATE_GROUP_FAIL = 10879;
+	/**
+	 * 生成IM usersig失败
+	 */
+	public static final Integer IM_USERSIG_CREATE_FAIL = 10880;
+	/**
+	 * 销毁群组失败
+	 */
+	public static final Integer IM_DESTROY_GROUP_FAIL = 10881;
+	/**
+	 * IM账号导入失败
+	 */
+	public static final Integer IM_ACOUNT_IMPORT_FAIL = 10882;
+
+	/**
+	 * 查看视频详情失败
+	 */
+	public static final Integer VEDIOS_DETAIL_VIEW_FAIL = 10883;
+	/**
+	 * 查看视频详情失败,视频编码错误或同个视频编码多个视频
+	 */
+	public static final Integer VEDIOS_DETAIL_VIEW_TOO_MANY_RESULTS = 10884;
+	/**
+	 * 转发视频信息失败
+	 */
+	public static final Integer VEDIOS_DETAIL_TRANSMIT_FAIL = 10885;
+	/**
+	 * 关注视频信息失败
+	 */
+	public static final Integer VEDIOS_DETAIL_FOLLOW_FAIL = 10886;
+	/**
+	 * 点赞视频信息失败
+	 */
+	public static final Integer VEDIOS_DETAIL_LIKE_FAIL = 10887;
+
+	/**
+	 * 收藏视频信息失败
+	 */
+	public static final Integer VEDIOS_DETAIL_COLLECT_FAIL = 10888;
+	/**
+	 * 获取用户收藏视频列表失败
+	 */
+	public static final Integer VEDIOS_DETAIL_COLLECT_LIST_FAIL = 10889;
+	/**
+	 * 获取我的视频列表失败
+	 */
+	public static final Integer VEDIOS_DETAIL_LIST_FAIL = 10890;
+
 	/**
 	 * 静态代码块，自定义编码需加入map
 	 */
@@ -192,9 +266,26 @@ public class GoodsApiCode extends BaseApiCode {
 		zhMsgMap.put(GOODS_IS_OFFLINE, "商品已下架");
 
 		//-------------------------------videos--------------------------------------
-		zhMsgMap.put(VEDIOS_BEGIN_LIVETIME_TOO_SMALL, "开播失败，直播开始时间未大于当前时间10分钟");
+		zhMsgMap.put(VEDIOS_BEGIN_LIVETIME_UN_SAME, "开播时间与预播时间不一致，偏差大于10分钟");
+		zhMsgMap.put(VEDIOS_END_LIVETIME_IS_NULL, "直播结束时间不能为空且要大于直播开始时间");
+		zhMsgMap.put(VEDIOS_ADD_FAIL, "新增视频开播信息失败");
+		zhMsgMap.put(VEDIOS_LIVE_FAIL, "视频开播失败");
+		zhMsgMap.put(VEDIOS_LIST_FAIL, "获取视频开播列表失败");
+		zhMsgMap.put(VEDIOS_DELETE_FAIL, "删除开播信息失败");
+		zhMsgMap.put(VEDIOS_TRANSMIT_FAIL, "转发开播信息失败");
+		zhMsgMap.put(VEDIOS_VIEW_FAIL, "查看开播信息详情失败");
 
-		zhMsgMap.put(VEDIOS_END_LIVETIME_IS_NULL, "开播失败，直播结束时间不能为空且要大于直播开始时间");
 
+		zhMsgMap.put(IM_CREATE_GROUP_FAIL, "创建群组失败");
+		zhMsgMap.put(IM_USERSIG_CREATE_FAIL, "生成IM usersig失败");
+		zhMsgMap.put(IM_DESTROY_GROUP_FAIL, "销毁群组失败");
+		zhMsgMap.put(IM_ACOUNT_IMPORT_FAIL, "IM账号导入失败");
+		zhMsgMap.put(VEDIOS_DETAIL_VIEW_FAIL, "查看视频详情失败");
+		zhMsgMap.put(VEDIOS_DETAIL_VIEW_TOO_MANY_RESULTS, "查看视频详情失败,视频编码错误或同个视频编码多个视频");
+		zhMsgMap.put(VEDIOS_DETAIL_TRANSMIT_FAIL, "转发视频信息失败");
+		zhMsgMap.put(VEDIOS_DETAIL_FOLLOW_FAIL, "关注视频信息失败");
+		zhMsgMap.put(VEDIOS_DETAIL_LIKE_FAIL, "点赞视频信息失败");
+		zhMsgMap.put(VEDIOS_DETAIL_COLLECT_LIST_FAIL, "获取用户收藏视频列表失败");
+		zhMsgMap.put(VEDIOS_DETAIL_LIST_FAIL, "获取我的视频列表失败");
 	}
 }

@@ -1,3 +1,4 @@
+/*
 package com.qcwoshou.goods.controller.app;
 
 import com.qcwoshou.core.dto.result.BaseCommonResult;
@@ -63,3 +64,4 @@ import javax.validation.Valid;
 		return goodsService.appGoodsDetails(request);
 	}
 }
+*/

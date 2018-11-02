@@ -78,7 +78,7 @@ public class GlobalExceptionHandler {
      **/
     @ExceptionHandler(value = HttpMessageConversionException.class)
     public BaseCommonResult httpMessageConversionHandler(HttpServletRequest request, HttpMessageConversionException exception) {
-    	log.info("商品信息-请求处理失败：{}",exception);
+    	log.info("视频模块-请求处理失败：{}",exception);
     	return new BaseCommonResult(GoodsApiCode.FAIL,"请求参数绑定失败(请检查字段名称、类型、格式等)");
     }
     
@@ -103,7 +103,7 @@ public class GlobalExceptionHandler {
      **/
     @ExceptionHandler(value = Exception.class)
     public BaseCommonResult defaultHandlerExceptionResolverHandler(Exception exception) {
-    	log.info("商品信息-请求处理失败：{}",exception);
+    	log.info("视频模块-请求处理失败：{}",exception);
     	return new BaseCommonResult(GoodsApiCode.FAIL, GoodsApiCode.getZhMsg(GoodsApiCode.FAIL));
     }
 

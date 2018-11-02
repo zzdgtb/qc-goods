@@ -4,12 +4,14 @@
   <resultMap id="BaseResultMap" type="com.qcwoshou.goods.model.PVideoDetails" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="video_code" property="videoCode" jdbcType="VARCHAR" />
+    <result column="live_info_id" property="liveInfoId" jdbcType="BIGINT" />
     <result column="push_live_url" property="pushLiveUrl" jdbcType="VARCHAR" />
     <result column="play_live_url" property="playLiveUrl" jdbcType="VARCHAR" />
     <result column="play_record_url" property="playRecordUrl" jdbcType="VARCHAR" />
     <result column="room_code" property="roomCode" jdbcType="VARCHAR" />
     <result column="real_begin_livetime" property="realBeginLivetime" jdbcType="TIMESTAMP" />
     <result column="real_end_livetime" property="realEndLivetime" jdbcType="TIMESTAMP" />
+    <result column="is_end_live" property="isEndLive" jdbcType="TINYINT" />
     <result column="create_user_id" property="createUserId" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
@@ -74,8 +76,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, video_code, push_live_url, play_live_url, play_record_url, room_code, real_begin_livetime, 
-    real_end_livetime, create_user_id, create_time, update_time, is_delete
+    id, video_code, live_info_id, push_live_url, play_live_url, play_record_url, room_code, 
+    real_begin_livetime, real_end_livetime, is_end_live, create_user_id, create_time, 
+    update_time, is_delete
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qcwoshou.goods.model.PVideoDetailsExample" >
     select
@@ -112,13 +115,15 @@
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into p_video_details (video_code, push_live_url, play_live_url, 
-      play_record_url, room_code, real_begin_livetime, 
-      real_end_livetime, create_user_id, create_time, 
+    insert into p_video_details (video_code, live_info_id, push_live_url, 
+      play_live_url, play_record_url, room_code, 
+      real_begin_livetime, real_end_livetime, 
+      is_end_live, create_user_id, create_time, 
       update_time, is_delete)
-    values (#{videoCode,jdbcType=VARCHAR}, #{pushLiveUrl,jdbcType=VARCHAR}, #{playLiveUrl,jdbcType=VARCHAR}, 
-      #{playRecordUrl,jdbcType=VARCHAR}, #{roomCode,jdbcType=VARCHAR}, #{realBeginLivetime,jdbcType=TIMESTAMP}, 
-      #{realEndLivetime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+    values (#{videoCode,jdbcType=VARCHAR}, #{liveInfoId,jdbcType=BIGINT}, #{pushLiveUrl,jdbcType=VARCHAR}, 
+      #{playLiveUrl,jdbcType=VARCHAR}, #{playRecordUrl,jdbcType=VARCHAR}, #{roomCode,jdbcType=VARCHAR}, 
+      #{realBeginLivetime,jdbcType=TIMESTAMP}, #{realEndLivetime,jdbcType=TIMESTAMP}, 
+      #{isEndLive,jdbcType=TINYINT}, #{createUserId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.qcwoshou.goods.model.PVideoDetails" >
@@ -129,6 +134,9 @@
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="videoCode != null" >
         video_code,
+      </if>
+      <if test="liveInfoId != null" >
+        live_info_id,
       </if>
       <if test="pushLiveUrl != null" >
         push_live_url,
@@ -148,6 +156,9 @@
       <if test="realEndLivetime != null" >
         real_end_livetime,
       </if>
+      <if test="isEndLive != null" >
+        is_end_live,
+      </if>
       <if test="createUserId != null" >
         create_user_id,
       </if>
@@ -164,6 +175,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="videoCode != null" >
         #{videoCode,jdbcType=VARCHAR},
+      </if>
+      <if test="liveInfoId != null" >
+        #{liveInfoId,jdbcType=BIGINT},
       </if>
       <if test="pushLiveUrl != null" >
         #{pushLiveUrl,jdbcType=VARCHAR},
@@ -182,6 +196,9 @@
       </if>
       <if test="realEndLivetime != null" >
         #{realEndLivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isEndLive != null" >
+        #{isEndLive,jdbcType=TINYINT},
       </if>
       <if test="createUserId != null" >
         #{createUserId,jdbcType=INTEGER},
@@ -212,6 +229,9 @@
       <if test="record.videoCode != null" >
         video_code = #{record.videoCode,jdbcType=VARCHAR},
       </if>
+      <if test="record.liveInfoId != null" >
+        live_info_id = #{record.liveInfoId,jdbcType=BIGINT},
+      </if>
       <if test="record.pushLiveUrl != null" >
         push_live_url = #{record.pushLiveUrl,jdbcType=VARCHAR},
       </if>
@@ -229,6 +249,9 @@
       </if>
       <if test="record.realEndLivetime != null" >
         real_end_livetime = #{record.realEndLivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isEndLive != null" >
+        is_end_live = #{record.isEndLive,jdbcType=TINYINT},
       </if>
       <if test="record.createUserId != null" >
         create_user_id = #{record.createUserId,jdbcType=INTEGER},
@@ -251,12 +274,14 @@
     update p_video_details
     set id = #{record.id,jdbcType=BIGINT},
       video_code = #{record.videoCode,jdbcType=VARCHAR},
+      live_info_id = #{record.liveInfoId,jdbcType=BIGINT},
       push_live_url = #{record.pushLiveUrl,jdbcType=VARCHAR},
       play_live_url = #{record.playLiveUrl,jdbcType=VARCHAR},
       play_record_url = #{record.playRecordUrl,jdbcType=VARCHAR},
       room_code = #{record.roomCode,jdbcType=VARCHAR},
       real_begin_livetime = #{record.realBeginLivetime,jdbcType=TIMESTAMP},
       real_end_livetime = #{record.realEndLivetime,jdbcType=TIMESTAMP},
+      is_end_live = #{record.isEndLive,jdbcType=TINYINT},
       create_user_id = #{record.createUserId,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
@@ -270,6 +295,9 @@
     <set >
       <if test="videoCode != null" >
         video_code = #{videoCode,jdbcType=VARCHAR},
+      </if>
+      <if test="liveInfoId != null" >
+        live_info_id = #{liveInfoId,jdbcType=BIGINT},
       </if>
       <if test="pushLiveUrl != null" >
         push_live_url = #{pushLiveUrl,jdbcType=VARCHAR},
@@ -289,6 +317,9 @@
       <if test="realEndLivetime != null" >
         real_end_livetime = #{realEndLivetime,jdbcType=TIMESTAMP},
       </if>
+      <if test="isEndLive != null" >
+        is_end_live = #{isEndLive,jdbcType=TINYINT},
+      </if>
       <if test="createUserId != null" >
         create_user_id = #{createUserId,jdbcType=INTEGER},
       </if>
@@ -307,16 +338,74 @@
   <update id="updateByPrimaryKey" parameterType="com.qcwoshou.goods.model.PVideoDetails" >
     update p_video_details
     set video_code = #{videoCode,jdbcType=VARCHAR},
+      live_info_id = #{liveInfoId,jdbcType=BIGINT},
       push_live_url = #{pushLiveUrl,jdbcType=VARCHAR},
       play_live_url = #{playLiveUrl,jdbcType=VARCHAR},
       play_record_url = #{playRecordUrl,jdbcType=VARCHAR},
       room_code = #{roomCode,jdbcType=VARCHAR},
       real_begin_livetime = #{realBeginLivetime,jdbcType=TIMESTAMP},
       real_end_livetime = #{realEndLivetime,jdbcType=TIMESTAMP},
+      is_end_live = #{isEndLive,jdbcType=TINYINT},
       create_user_id = #{createUserId,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       is_delete = #{isDelete,jdbcType=TINYINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="getCollectVideoList" parameterType="com.qcwoshou.goods.dto.request.VideosListRequest"
+          resultType="com.qcwoshou.goods.dto.response.VideoDetailsResponse">
+    SELECT DISTINCT
+		a.id,
+		a.video_code as videoCode,
+		a.live_info_id as liveInfoId,
+		a.create_user_id as createUserId,
+		a.is_end_live as isEndLive,
+		a.real_begin_livetime as realBeginLivetime,
+		a.real_end_livetime as realEndLivetime,
+		b.begin_live_time as beginLiveTime,
+		b.class_name as className,
+		b.course ,
+		b.course_data_url as courseDataUrl,
+		b.end_live_time as endLiveTime,
+		b.main_pic_url as mainPicUrl,
+		b.`subject`
+	FROM
+		p_collect c
+inner join
+		p_video_details a on c.video_code=a.video_code and a.is_delete =0
+	inner join
+		p_live_info b
+	on
+		a.live_info_id =b.id and b.is_delete=0
+	WHERE
+		c.is_delete =0
+		and c.user_id =#{userId}
+  </select>
+  <select id="getVideoList" parameterType="com.qcwoshou.goods.dto.request.VideosCollectListRequest"
+          resultType="com.qcwoshou.goods.dto.response.VideoDetailsResponse">
+    SELECT DISTINCT
+		a.id,
+		a.video_code as videoCode,
+		a.live_info_id as liveInfoId,
+		a.create_user_id as createUserId,
+		a.is_end_live as isEndLive,
+		a.real_begin_livetime as realBeginLivetime,
+		a.real_end_livetime as realEndLivetime,
+		b.begin_live_time as beginLiveTime,
+		b.class_name as className,
+		b.course ,
+		b.course_data_url as courseDataUrl,
+		b.end_live_time as endLiveTime,
+		b.main_pic_url as mainPicUrl,
+		b.`subject`
+	FROM
+		p_video_details a
+	inner join
+		p_live_info b
+	on
+		a.live_info_id =b.id and b.is_delete=0
+	WHERE
+		a.is_delete =0
+		and a.create_user_id =#{userId}
+  </select>
 </mapper>
